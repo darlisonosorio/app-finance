@@ -12,7 +12,6 @@ import type { ListUserDto } from '../../models/listUser';
 import './styles.css';
 
 
-
 const AddFinancePage = () => {
   const { id } = useParams();
   const isEdit = Boolean(id);
@@ -90,7 +89,6 @@ const AddFinancePage = () => {
       ]
     }
       
-    console.log('setUsers', users, previousUser, users.some(user => user.id === previousUser?.id));
     setUsers(users);
     return users.map((user) => ({ label: user.name, value: user.id }));
   }, [previousUser]);
@@ -108,13 +106,16 @@ const AddFinancePage = () => {
           className="mt-12 space-y-4 bg-base-100 p-6 rounded shadow text-left"
         >
           <div>
-            <label className="block mb-1 font-medium text-left">Usuário</label>
+            <label htmlFor="user_id" className="block mb-1 font-medium text-left">Usuário</label>
             <Controller
               name="user_id"
               control={control}
               rules={{ required: "Usuário é obrigatório" }}
               render={({ field }) => (
                 <AsyncSelect
+                  data-testid="async-select"
+                  id="user_id"
+                  aria-label="Usuário"
                   cacheOptions
                   defaultOptions={users.map((user) => ({ label: user.name, value: user.id }))}
                   loadOptions={loadOptions}
@@ -134,8 +135,9 @@ const AddFinancePage = () => {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-left">Valor</label>
+            <label htmlFor="value" className="block mb-1 font-medium text-left">Valor</label>
             <input
+              id="value"
               type="number"
               step="0.01"
               className="input input-bordered w-full text-left"
@@ -145,8 +147,9 @@ const AddFinancePage = () => {
           </div>
 
           <div>
-            <label className="block mb-1 font-medium text-left">Descrição</label>
+            <label htmlFor="description" className="block mb-1 font-medium text-left">Descrição</label>
             <input
+              id="description" 
               type="text"
               className="input input-bordered w-full text-left"
               {...register("description", { required: "Descrição é obrigatória", maxLength: 256 })}
@@ -156,6 +159,7 @@ const AddFinancePage = () => {
 
           <div className="flex justify-end gap-2">
             <button
+              data-testid="btn-cancel"
               type="button"
               onClick={() => navigate(backPage)}
               className="w-[170px] btn btn-outline"
@@ -164,6 +168,7 @@ const AddFinancePage = () => {
             </button>
 
             <button
+              data-testid="btn-save"
               type="submit"
               disabled={isSubmitting}
               className="w-[170px] btn btn-primary"

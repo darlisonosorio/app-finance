@@ -3,22 +3,22 @@ import type { ListFinanceResult } from '../models/listFinance';
 import type { Finance } from "../models/finance";
 import type { FinanceForm } from "../models/financeForm";
 
-const financeService = new BaseService("/finance");
+export const getFinanceService = () => new BaseService("/finance");
 
 export async function fetchFinances(page: number, limit: number, search: string = ''): Promise<ListFinanceResult> {
-  return (await financeService.get("/", { params: { page, limit, search } })).data;
+  return (await getFinanceService().get("/", { params: { page, limit, search } })).data;
 }
 
 export async function getFinance(id: number): Promise<Finance> {
-  return (await financeService.get(`/${id}`)).data;
+  return (await getFinanceService().get(`/${id}`)).data;
 }
 
 export async function deleteFinance(id: number): Promise<void> {
-  await financeService.delete(`/${id}`);
+  await getFinanceService().delete(`/${id}`);
 }
 
 export async function createFinance(financeForm: FinanceForm): Promise<number> {
-  const response =  await financeService.post('/', financeForm);
+  const response =  await getFinanceService().post('/', financeForm);
   
   if (response.status < 200 || response.status > 305) {
     throw new Error(response.data?.message || 'Erro na requisição');
@@ -28,7 +28,7 @@ export async function createFinance(financeForm: FinanceForm): Promise<number> {
 }
 
 export async function updateFinance(id: number, financeForm: FinanceForm): Promise<void> {
-  const response = await financeService.put(`/${id}`, financeForm);
+  const response = await getFinanceService().put(`/${id}`, financeForm);
   
   if (response.status < 200 || response.status > 305) {
     throw new Error(response.data?.message || 'Erro na requisição');

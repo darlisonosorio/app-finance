@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",   
+    "module": "esnext", 
+    "esModuleInterop": true,
+    "allowJs": true,
+    "verbatimModuleSyntax": false,
+    "types": ["vite/client", "jest"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"]
+}

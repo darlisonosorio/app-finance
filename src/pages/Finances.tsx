@@ -123,12 +123,14 @@ function FinancePage() {
                     <td className="px-4 py-2 align-middle flex justify-end gap-2">
                       <a
                         onClick={() => handleEdit(finance)}
+                        aria-label={`edit-${finance.id}`}
                         className="p-1 rounded hover:bg-base-300"
                       >
                         <PencilIcon className="h-5 w-5" />
                       </a>
                       <a
                         onClick={() => setToDelete(finance)}
+                        aria-label={`delete-${finance.id}`}
                         className="p-1 rounded hover:bg-red-300"
                       >
                         <TrashIcon className="h-5 w-5" />
@@ -147,6 +149,7 @@ function FinancePage() {
 
           <div className="flex justify-between items-center mt-4">
             <a
+              aria-label="prev-page"
               onClick={financesResult?.meta?.page <= 1 ? () => {} : handlePrev}
               className="p-2 rounded bg-base-300 hover:bg-base-400 disabled:opacity-50"
             >
@@ -154,6 +157,7 @@ function FinancePage() {
             </a>
             <span>Página {financesResult?.meta?.page} de {financesResult?.meta?.totalPages}</span>
               <a
+                aria-label="next-page"
                 onClick={financesResult?.meta?.page === financesResult?.meta?.totalPages ? () => {} : handleNext}
                 className="p-2 rounded bg-base-300 hover:bg-base-400 disabled:opacity-50"
               >
