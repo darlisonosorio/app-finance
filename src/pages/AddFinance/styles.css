@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.select__control {
+  @apply input border border-base-300 w-full text-left bg-black text-white;
+  background-color: #1d232a !important;
+  color: white !important;
+}
+
+.select__control .select__input-container,
+.select__control .select__single-value {
+  color: white !important;
+}
+
+.select__menu {
+  @apply bg-black;
+  background-color: #1d232a !important;
+}
